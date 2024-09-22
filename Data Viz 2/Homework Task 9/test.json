@@ -1,0 +1,34 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "../data/locdat2.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {
+        "filter": "datum['Victim.injury'] !== null && datum['Victim.injury'] !== ''"
+      },
+      {
+        "aggregate": [
+          {
+            "op": "count",
+            "as": "count"
+          }
+        ],
+        "groupby": ["Victim.injury"]
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {
+        "field": "Victim.injury",
+        "title": "Injury Status"
+      },
+      "y": {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Count"
+      }
+    },
+    "title": "Unique Values of Victim.injury"
+  }
