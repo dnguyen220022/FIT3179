@@ -6,112 +6,77 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
 </head>
 <body>
-  <div id="vis"/>
+  <div id="vis"></div>
   <script>
     const spec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "COVID-19 Active Cases (10 Oct 2020)",
-  "width": 800,
-  "height": 400,
-  "data": {
-    "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
-    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
-  },
-  "projection": {"type": "equalEarth"},
-  "layer": [
-    {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "title": "Shark Attacks by State",
+      "width": 800,
+      "height": 400,
+      "data": {
+        "url": "states.json",
+        "format": {"type": "topojson", "feature": "states"}
+      },
+      "projection": {"type": "mercator"},
       "transform": [
         {
-          "calculate": "'Data is not available in ' + datum.properties.NAME",
-          "as": "note"
-        }
-      ],
-      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
-      "encoding": {"tooltip": {"field": "note"}}
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
-        "format": {"type": "topojson", "feature": "oceans"}
-      },
-      "mark": {"type": "geoshape", "fill": "skyblue"}
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
-        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
-      },
-      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
-    },
-    {
-      "transform": [
-        {
-          "lookup": "properties.NAME",
+          "lookup": "properties.STATE_NAME",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/data/covid_10_10_2020.csv"
+              "values": [
+                {"state_abbrev": "NSW", "state_full": "New South Wales"},
+                {"state_abbrev": "QLD", "state_full": "Queensland"},
+                {"state_abbrev": "WA", "state_full": "Western Australia"},
+                {"state_abbrev": "VIC", "state_full": "Victoria"},
+                {"state_abbrev": "SA", "state_full": "South Australia"},
+                {"state_abbrev": "TAS", "state_full": "Tasmania"},
+                {"state_abbrev": "NT", "state_full": "Northern Territory"},
+                {"state_abbrev": "ACT", "state_full": "Australian Capital Territory"}
+              ]
             },
-            "key": "Country",
-            "fields": ["Active", "Confirmed", "Population"]
+            "key": "state_full",
+            "fields": ["state_abbrev"]
           }
         },
         {
-          "calculate": "datum.Confirmed/datum.Population * 10000",
-          "as": "Confirmed per 10,000 population"
+          "lookup": "state_abbrev",
+          "from": {
+            "data": {
+              "url": "../Data/locdat2.csv",
+              "format": {"type": "csv"}
+            },
+            "key": "state",
+            "fields": ["count"]
+          }
+        },
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "shark_attacks"
+            }
+          ],
+          "groupby": ["state_abbrev"]
         }
       ],
-      "mark": {"type": "geoshape", "stroke": "white"},
+      "mark": {
+        "type": "geoshape"
+      },
       "encoding": {
         "color": {
-          "field": "Confirmed per 10,000 population",
+          "field": "shark_attacks",
           "type": "quantitative",
           "scale": {
-            "type": "threshold",
-            "domain": [1, 10, 100],
-            "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#a63603"]
+            "scheme": "reds"
           }
         },
         "tooltip": [
-          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-          {"field": "Active", "type": "quantitative"},
-          {
-            "field": "Confirmed per 10,000 population",
-            "type": "quantitative",
-            "format": ".2f"
-          }
+          {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
+          {"field": "shark_attacks", "type": "quantitative", "title": "Shark Attacks"}
         ]
       }
-    },
-    {
-      "transform": [
-        {
-          "lookup": "properties.NAME",
-          "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/data/countryInfo.csv"
-            },
-            "key": "name",
-            "fields": ["latitude", "longitude"]
-          }
-        }
-      ],
-      "mark": {"type": "text"},
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "properties.NAME", "type": "nominal"},
-        "opacity": {
-          "condition": {
-            "test": "datum['properties.NAME'] == 'China' || datum['properties.NAME'] == 'Brazil' || datum['properties.NAME'] == 'Australia' || datum['properties.NAME'] == 'Malaysia' ||  datum['properties.NAME'] == 'Yemen' ||  datum['properties.NAME'] == 'United States of America'",
-            "value": 1
-          },
-          "value": 0
-        }
-      }
-    }
-  ],
-  "config": {}
-};
+    };
+
     vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
   </script>
 </body>
