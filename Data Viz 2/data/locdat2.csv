@@ -972,7 +972,7 @@ Incident.day,Incident.month,Incident.year,Victim.injury,State,Location,Latitude,
 9,6,2014,injured,SA,"""parsons beach, fleurieu peninsula""",-35.63087083,138.4666667,white shark,1.5,unprovoked,1,boarding,torso,minor lacerations,male,39,0945
 1,6,2014,injured,NSW,"""seven mile beach, nowra""",-34.83333333,150.75,wobbegong,,provoked,1,boarding,foot,minor lacerations,male,,0700
 19,6,2014,injured,SA,middleton beach,-35.5,138.7166667,white shark,2.8,unprovoked,1,boarding,leg,minor lacerations,male,15,1700
-19,6,2014,Injured,SA,middleton beach,-35.5,138.7166667,white shark,2.8,unprovoked,1,boarding,,minor lacerations,male,,1700
+19,6,2014,injured,SA,middleton beach,-35.5,138.7166667,white shark,2.8,unprovoked,1,boarding,,minor lacerations,male,,1700
 16,8,2014,injured,WA,gnaraloo station,-23.78333333,113.5,whaler shark,,provoked,1,spearfishing,head,major lacerations,male,31,
 9,9,2014,fatal,NSW,"""byron bay, clarkes beach""",-28.63333333,153.6,white shark,3.7,unprovoked,1,snorkelling,thigh,major lacerations,male,50,1030
 26,9,2014,injured,NSW,""" port macquarie, town beach""",-31.41666667,152.9166667,wobbegong,,unprovoked,1,swimming,"""arm, hand""",minor lacerations,female,13,

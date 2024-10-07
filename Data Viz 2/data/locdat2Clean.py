@@ -16,4 +16,9 @@ data = data.drop(data[data["Injury.severity"] == "male"].index)
 print("done")
 data = data.drop(data[~data["Victim.gender"].isin(["male", "female"])].index)
 print("done")
+
+#convert to lowercase
+data["Victim.injury"] = data["Victim.injury"].str.lower()
+
+#save to csv
 data.to_csv("Data Viz 2\\data\\locdat2.csv", index=False)
