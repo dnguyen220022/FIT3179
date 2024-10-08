@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Shark Attacks by Year",
+    "data": {
+        "url": "https://raw.githubusercontent.com/dnguyen220022/FIT3179/refs/heads/main/Data%20Viz%202/data/locdat2.csv",
+        "format": {"type": "csv"}
+    },
+    "width": 1200,
+    "height": 600,
+    "mark": "line",
+    "encoding": {
+        "x": {"field": "Incident\\.year", "type": "quantitative", "title": "Year"},
+        "y": {"aggregate": "count", "title": "Total Attacks"}
+    }
+}

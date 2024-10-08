@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Shark Attacks by Age of Victim",
+    "data": {
+        "url": "Data Viz 2\\Visualisations\\attackByAge\\attackbyAge.csv",
+        "format": {"type": "csv"}
+    },
+    "width": 1200,
+    "height": 600,
+    "mark": "bar",
+    "encoding": {
+        "x": {"field": "Victim\\.age", "type": "quantitative", "title": "Age", "scale": {"domain": [0, 90]}},
+        "y": {"aggregate": "count", "title": "Total Attacks"}
+    }
+}

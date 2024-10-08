@@ -1,0 +1,21 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Attack Provication and Shark Type",
+    "width": 600,
+    "height": 500,
+    "data": {
+        "url": "Data Viz 2\\Visualisations\\sharkTypes\\sharkTypes.csv",
+        "format": {"type": "csv"}
+    },
+    "mark": "bar",
+    "encoding": {
+        "y": {"field": "Shark\\.label", "type": "nominal", "title": "Shark Type"},
+        "x": {"aggregate": "count", "title": "Total Attacks"},
+        "color": {
+            "field": "Provoked\\.unprovoked",
+            "type": "nominal",
+            "title": "Injury Status",
+            "scale": {"scheme": "category10"}
+        }
+    }
+}
