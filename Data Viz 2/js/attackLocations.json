@@ -11,7 +11,7 @@
               "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
             },
             "mark": {"type": "geoshape", "fill": "null", "stroke": null}
-          },
+        },
         {
             "data": {
             "url": "https://raw.githubusercontent.com/dnguyen220022/FIT3179/refs/heads/main/Data%20Viz%202/data/ausMap.json",
