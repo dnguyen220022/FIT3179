@@ -46,7 +46,14 @@
                 "labelExpr": "datum.label == 'fatal' ? 'Fatal' : datum.label == 'injured' ? 'Injured' : 'Uninjured'"
                 
             }
-          }
+          },
+          "tooltip": [
+            { "field": "Incident\\.year", "title": "Year", "type": "quantitative" },
+            { "field": "State", "title": "State", "type": "nominal" },
+            { "field": "Shark\\.common\\.name", "title": "Shark Type", "type": "nominal" },
+            { "field": "Victim\\.injury", "title": "Injury Status", "type": "nominal" },
+            { "field": "Provoked\\.unprovoked", "title": "Attack Provocation", "type": "nominal" }
+            ]
         },
         "transform": [
           {
