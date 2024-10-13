@@ -5,11 +5,36 @@
         "url": "Data Viz 2\\Visualisations\\attackByAge\\attackbyAge.csv",
         "format": {"type": "csv"}
     },
-    "width": 1200,
-    "height": 600,
-    "mark": "bar",
+    "width": 400,
+    "height": 300,
+    "mark": {
+        "type": "bar",
+        "tooltip": true
+    },
     "encoding": {
-        "x": {"field": "Victim\\.age", "type": "quantitative", "title": "Age", "scale": {"domain": [0, 90]}},
-        "y": {"aggregate": "count", "title": "Total Attacks"}
-    }
+        "x": {"field": "Victim\\.age", "type": "quantitative", "title": "Age", "scale": {"domain": [0, 90]}, "bin": {"maxbins": 20}},
+        "y": {"aggregate": "count", "title": "Total Attacks"},
+        "color": {
+            "value": "lightblue"
+        }
+    },
+    "config": {
+        "axis": {
+          "labelFont": "Arial", 
+          "labelFontSize": 12,  
+          "titleFont": "Arial",  
+          "titleFontSize": 14     
+        },
+        "legend": {
+          "labelFont": "Arial",     
+          "labelFontSize": 12,       
+          "titleFont": "Arial",     
+          "titleFontSize": 14,
+          "symbolSize": 200
+        },
+        "title": {
+          "font": "Arial",         
+          "fontSize": 16     
+        }
+      }
 }

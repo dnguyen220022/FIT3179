@@ -1,15 +1,74 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Shark Attacks by Year",
+    "title": "Shark Attacks by Year (5 Year Rolling Average)",
     "data": {
         "url": "https://raw.githubusercontent.com/dnguyen220022/FIT3179/refs/heads/main/Data%20Viz%202/data/locdat2.csv",
         "format": {"type": "csv"}
     },
-    "width": 1200,
-    "height": 600,
+    "width": 450,
+    "height": 300,
+    "transform": [
+        {
+            "aggregate": [
+                {"op": "count", "as": "Total Attacks"}
+            ],
+            "groupby": ["Incident\\.year", "State"]
+        },
+        {
+            "window": [
+                {
+                    "op": "mean",
+                    "field": "Total Attacks",
+                    "as": "Rolling Average"
+                }
+            ],
+            "frame": [-2, 2],
+            "groupby": ["State"]
+        },
+        {
+            "filter": "StateSelect == 'All' || datum['State'] == StateSelect"
+        }
+    ],
     "mark": "line",
     "encoding": {
         "x": {"field": "Incident\\.year", "type": "quantitative", "title": "Year"},
-        "y": {"aggregate": "count", "title": "Total Attacks"}
+        "y": {"field": "Rolling Average", "type": "quantitative", "title": "Average Total Attacks per Year"},
+        "color": {
+            "field": "State",
+            "type": "nominal",
+            "title": "State",
+            "legend": {"orient": "top-left"}
+        }
+    },
+    "params": [
+        {
+            "name": "StateSelect",
+            "value": ["All"],
+            "bind": {
+                "input": "radio",
+                "options": ["All", "NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"],
+                "name": "State "
+            }
+        }
+    ],
+    "config": {
+        "axis": {
+            "labelFont": "Arial",
+            "labelFontSize": 12,
+            "titleFont": "Arial",
+            "titleFontSize": 14,
+            "format": "d"
+        },
+        "legend": {
+            "labelFont": "Arial",
+            "labelFontSize": 12,
+            "titleFont": "Arial",
+            "titleFontSize": 14,
+            "symbolSize": 200
+        },
+        "title": {
+            "font": "Arial",
+            "fontSize": 16
+        }
     }
 }

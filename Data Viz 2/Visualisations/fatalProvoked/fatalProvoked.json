@@ -1,0 +1,80 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 300,"height": 300,
+    "data": {
+      "url": "Data Viz 2\\Visualisations\\fatalProvoked\\fatalProvoked.csv"
+    },
+    "params": [{
+      "name": "view",
+      "select": "point",
+      "bind": "scales"
+    }],
+    "mark": {
+      "type": "circle"
+    },
+    "encoding": {
+      "y": {
+        "title": "Unprovoked Attack Percentage",
+        "field": "unprovokedAttProp",
+        "type": "quantitative",
+        "scale": {"zero": false},
+        "axis": {"minExtent": 30}
+      },
+      "x": {
+        "title": "Fatal Attack Percentage",
+        "field": "fatalAttProp",
+        "type": "quantitative",
+        "scale": {
+            "domain": [-3, 50]
+        }
+
+    },
+      "size": {
+        "field": "totalAtt", 
+        "type": "quantitative", 
+        "title": "Total Attacks", 
+        "scale": {
+            "range": [0, 1750], 
+            "domain": [0, 350]
+        }, 
+        "legend": {
+            "values": [50, 100, 200, 350],
+            "orient": "right" 
+        }
+    },
+      "color": {
+        "field": "Shark\\.label", 
+        "title": "Shark Type", 
+        "type": "nominal", 
+        "scale": {"scheme": "category10"},
+        "legend": {
+            "labelExpr": "datum.label == 'white shark' ? 'Great White' : datum.label == 'tiger shark' ? 'Tiger Shark' : datum.label == 'wobbegong' ? 'Wobbegong' : datum.label == 'bull shark' ? 'Bull Shark' : datum.label == 'whaler shark' ? 'Whaler Shark' : 'Other'"
+        }
+    },
+    "tooltip": [
+        {"field": "Shark\\.label", "title": "Shark Type:", "type": "nominal"},
+        {"field": "totalAtt", "title": "Total Attacks:", "type": "quantitative"},
+        {"field": "unprovokedAttProp", "title": "Unprovoked Attack Percentage:", "type": "quantitative", "format": ".2f"},
+        {"field": "fatalAttProp", "title": "Fatal Attack Percentage:", "type": "quantitative", "format": ".2f"}
+    ]
+    },
+    "config": {
+        "axis": {
+          "labelFont": "Arial", 
+          "labelFontSize": 12,  
+          "titleFont": "Arial",  
+          "titleFontSize": 14     
+        },
+        "legend": {
+          "labelFont": "Arial",     
+          "labelFontSize": 12,       
+          "titleFont": "Arial",     
+          "titleFontSize": 14,
+          "symbolSize": 200
+        },
+        "title": {
+          "font": "Arial",         
+          "fontSize": 16     
+        }
+      }
+  }

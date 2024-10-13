@@ -1,21 +1,55 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Attack Provication and Shark Type",
-    "width": 600,
-    "height": 500,
+    "width": 300,
+    "height": 300,
     "data": {
-        "url": "Data Viz 2\\Visualisations\\sharkTypes\\sharkTypes.csv",
-        "format": {"type": "csv"}
+      "url": "Data Viz 2\\Visualisations\\sharkTypes\\sharkTypes.csv",
+      "format": {"type": "csv"}
     },
+    "transform": [
+      {
+        "calculate": "datum['Shark\\.label'] == 'white shark' ? 'Great White' : datum['Shark\\.label'] == 'tiger shark' ? 'Tiger Shark' : datum['Shark\\.label'] == 'wobbegong' ? 'Wobbegong' : datum['Shark\\.label'] == 'bull shark' ? 'Bull Shark' : datum['Shark\\.label'] == 'whaler shark' ? 'Whaler Shark' : 'Other'",
+        "as": "RenamedSharkType"
+      }
+    ],
     "mark": "bar",
     "encoding": {
-        "y": {"field": "Shark\\.label", "type": "nominal", "title": "Shark Type"},
-        "x": {"aggregate": "count", "title": "Total Attacks"},
-        "color": {
-            "field": "Provoked\\.unprovoked",
-            "type": "nominal",
-            "title": "Injury Status",
-            "scale": {"scheme": "category10"}
+      "x": {
+        "field": "RenamedSharkType",
+        "type": "nominal", 
+        "title": "Shark Type",
+        "sort": {"field": "count", "op": "count", "order": "descending"}
+      },
+      "y": {"aggregate": "count", "title": "Total Attacks"},
+      "color": {
+        "field": "Provoked\\.unprovoked",
+        "type": "nominal",
+        "title": "Attack Provocation",
+        "scale": {"range": ["red", "lightblue"]},
+        "legend": {
+            "orient": "top-right",
+            "labelExpr": "datum.label == 'unprovoked' ? 'Unprovoked' : 'Provoked'"
         }
+      }
+    },
+    "config": {
+      "axis": {
+        "labelFont": "Arial", 
+        "labelFontSize": 12,  
+        "titleFont": "Arial",  
+        "titleFontSize": 14     
+      },
+      "legend": {
+        "labelFont": "Arial",     
+        "labelFontSize": 12,       
+        "titleFont": "Arial",     
+        "titleFontSize": 14,
+        "symbolSize": 200
+      },
+      "title": {
+        "font": "Arial",         
+        "fontSize": 16     
+      }
     }
-}
+  }
+  

@@ -1,51 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shark Attacks in Australia</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="testStyles.css">
+    <!-- Include Vega-Lite and Vega-Embed library -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-
-    <style>
-      /* CSS Grid layout for the visualizations */
-      .grid-container {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr); /* Two columns for the top row */
-          grid-template-rows: auto; /* Automatic row height */
-          gap: 100000px; /* Gap between items */
-      }
-
-      /* Make the bottom visualizations span the full width */
-      #vis3, #vis4 {
-          grid-column: 1 / 3; /* Span across two columns */
-      }
-  </style>
-
 </head>
+
 <body>
 
-    <h1>Shark Attacks in Australia</h1>
+    <div class = "page">
+        <h1>Shark Attacks in Australia</h1>
+        <h2>Attack Location and Injury Status</h2>
 
-    <!-- Divs for each visualization -->
-    <div id="vis1"></div>
-    <div id="vis2"></div>
-    <div id="vis3"></div>
-    <div id="vis4"></div>
+        <div class = "container">
+            <div id = "chart1" class = "chart"></div>
+            <div class = "text">
+                <p>Australia has some of the most shark infested waters in the world, and the highest rate of fatal shark attacks out of any country. Within Australia, New South Whales and Queensland are the places you are most likely to be attacked by a shark.</p>
+            </div>
+            
+        </div>
+        
+        <h2>Attack Provocation and Shark Type</h2>
+        <div class = "container">
+            <div class = "text">
+                <p>Great White Sharks constitute the greatest share of shark attacks in Australia, despite staying in temperate waters around the south coast. They also have the highest rate of unprovoked attacks on humans, however, Bull Sharks have the highest rate of unprovoked attacks on humans in Australia. Other sharks, such as the Wobbegong shark, are not as aggressive, and have a lower rate of unprovoked attacks</p>
+            </div>
+            <div id = "chart4" class = "chart"></div>
+        </div>
+        
+        <h2>Fatal Attacks vs Provoked Attacks</h2>
+        <div class = "container">
+            <div id = "chart5" class = "chart"></div>
+            <div class = "text">
+                <p>It makes sense that aggressive sharks, such as Great Whites and Bull Sharks will have higher rates of unprovoked attacks, as well as higher rates of fatal attacks.</p>
+                <p>It is interesting to note, however, that Tiger sharks have such a high rate of fatal attacks despite not regularly attacking unprovoked. This is because, unlike many other types of sharks, Tiger Sharks do not "care" how their prey tastes, so they will often keep eating their prey once they have bitten them, no matter what it is!</p>
+            </div>
+        </div>
+
+        <h2>Attacks by Age</h2>
+        <div class = "container">
+            <div class = "text">
+                <p>The majority of shark attack victims are aged 10-30, and this number drastically reduces as people get older.</p>
+                <p>Perhaps this is because more young people go to the beach, or because as you get older you are less likely to take actions that would put you at the risk of a shark attack.</p>
+            </div>
+            <div id = "chart3", class = "chart"></div>
+        </div>
+
+        <h2>Attacks by Year</h2>
+        <div class = "container">
+            <div id = "chart2", class = "chart"></div>
+            <div class = "text">
+                <p>New South Whales is by far the state with the most shark attacks. This is understandable due to the location of its coast, exposed directly to the ocean, as well as ocean temperature that suits a wide variety of sharks.</p>
+                <p>Queensland and Western Australia have recently had similar levels of attacks, however this was not the case in the past. Other states have had comparably much lower levels of shark attacks in the past 200 years.</p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
 
     <script>
-        // Embed visualization 1
-        vegaEmbed('#vis1', 'Data Viz 2\\Visualisations\\AttackLocations\\attackLocations.json').catch(console.error);
-
-        // Embed visualization 2
-        vegaEmbed('#vis4', 'Data Viz 2\\Visualisations\\attackByAge\\attackByAge.json').catch(console.error);
-
-        // Embed visualization 3
-        vegaEmbed('#vis3', 'Data Viz 2\\Visualisations\\attackByYear\\attackByYear.json').catch(console.error);
-
-        // Embed visualization 4
-        vegaEmbed('#vis2', 'Data Viz 2\\Visualisations\\sharkTypes\\sharkTypes.json').catch(console.error);
+        // Embed the charts using the JSON files
+    
+        vegaEmbed('#chart1', 'Data Viz 2\\Visualisations\\AttackLocations\\attackLocations.json'); 
+        vegaEmbed('#chart2', 'Data Viz 2\\Visualisations\\attackByYear\\attackByYear.json'); 
+        vegaEmbed('#chart3', 'Data Viz 2\\Visualisations\\attackByAge\\attackByAge.json'); 
+        vegaEmbed('#chart4', 'Data Viz 2\\Visualisations\\sharkTypes\\sharkTypes.json'); 
+        vegaEmbed('#chart5', 'Data Viz 2\\Visualisations\\fatalProvoked\\fatalProvoked.json'); 
     </script>
 
 </body>
